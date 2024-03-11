@@ -49,7 +49,7 @@ switch (language) {
     case 'English':
         const enData = data.map(data => data.en);
 
-        const mainData = {};
+        let mainData = {};
         data.forEach(dataItem => {
             let mainkey = dataItem.key.split('.');
             mainkey.reduce((obj, key, index) => {
@@ -61,56 +61,29 @@ switch (language) {
             }, mainData);
         });
 
-        // console.log(mainData);
-        // console.log(mainData);
         fs.writeFileSync('5.json', JSON.stringify(mainData));
-
+      break;
+      
     case 'Spanish':
-        switch (language) {
-            case 'English':
-                const spanData = data.map(data => data.esp);
+         
+    const spanData = data.map(data => data.en);
 
-                const mainData = {};
-                data.forEach(dataItem => {
-                    let mainkey = dataItem.key.split('.');
-                    mainkey.reduce((obj, key, index) => {
-                        if (index === mainkey.length - 1) {
-                            obj[key] = enData[data.indexOf(dataItem)];
-                        } else {
-                            return obj[key] = obj[key] || {};
-                        }
-                    }, mainData);
-                });
+   mainData = {};
+    data.forEach(dataItem => {
+        let mainkey = dataItem.key.split('.');
+        mainkey.reduce((obj, key, index) => {
+            if (index === mainkey.length - 1) {
+                obj[key] = enData[data.indexOf(dataItem)];
+            } else {
+                return obj[key] = obj[key] || {};
+            }
+        }, mainData);
+    });
 
-                console.log(mainData);
+    fs.writeFileSync('5.json', JSON.stringify(mainData));
 
-                // console.log(mainData);
-                // console.log(mainData);
-                fs.writeFileSync('5.json', JSON.stringify(mainData));
-        }
+    }
        
-        case 'Spanish':
-        switch (language) {
-            case 'Chiness':
-                const spanData = data.map(data => data.chi);
+   
 
-                const mainData = {};
-                data.forEach(dataItem => {
-                    let mainkey = dataItem.key.split('.');
-                    mainkey.reduce((obj, key, index) => {
-                        if (index === mainkey.length - 1) {
-                            obj[key] = enData[data.indexOf(dataItem)];
-                        } else {
-                            return obj[key] = obj[key] || {};
-                        }
-                    }, mainData);
-                });
 
-                console.log(mainData);
-
-                // console.log(mainData);
-                // console.log(mainData);
-                fs.writeFileSync('5.json', JSON.stringify(mainData));
-        }
-
- }
